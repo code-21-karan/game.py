@@ -1,19 +1,23 @@
 import streamlit as st
-import requests
-from datetime import datetime
 import random
 
-# कंप्यूटर एक नंबर चुनता है (1 से 10 के बीच)
-secret_number = random.randint(1, 10)
+st.title("Number Guessing Game")
 
-print("नमस्ते! मैंने 1 से 10 के बीच एक नंबर सोचा है।")
-print("क्या आप बता सकते हैं कि वह कौन सा नंबर है?")
+# Secret number generate karna (Session State use karna zaroori hai taaki number reload na ho)
+if 'secret_number' not in st.session_state:
+    st.session_state.secret_number = random.randint(1, 10)
 
-# यूज़र का इनपुट
-guess = int(input("आपका अनुमान लिखें: "))
+st.write("नमस्ते! मैंने 1 से 10 के बीच एक नंबर सोचा है!")
 
-# चेक करना कि अनुमान सही है या नहीं
-if guess == secret_number:
-    print("बधाई हो! आपने बिल्कुल सही अनुमान लगाया।")
-else:
-    print(f"ओह! सही नंबर {secret_number} था। अगली बार कोशिश करें!")
+# User input
+guess = st.number_input("अपना अनुमान लिखें:", min_value=1, max_value=10, step=1)
+
+if st.button("चेक करें"):
+    if guess == st.session_state.secret_number:
+        st.success("बधाई हो! आपने बिल्कुल सही अनुमान लगाया!")
+    else:
+        st.error(f"ओह! सही नंबर {st.session_state.secret_number} था। अगली बार कोशिश करें!")
+        # Naya game shuru karne ke liye
+        if st.button("फिर से खेलें"):
+            st.session_state.secret_number = random.randint(1, 10)
+            st.rerun()
