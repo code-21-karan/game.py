@@ -15,7 +15,7 @@ guess = st.number_input("अपना अनुमान लिखें:", min_
 if st.button("चेक करें"):
     if guess == st.session_state.secret_number:
         st.success("बधाई हो! आपने बिल्कुल सही अनुमान लगाया!")
-        anesw-with auto =  (1, 100, khud hi anwser set)
+       st.write (f"sahi jawab the {st.session_state, secret_number}")
     else:
         st.error(f"ओह! सही नंबर {st.session_state.secret_number} था। अगली बार कोशिश करें!")
         # Naya game shuru karne ke liye
