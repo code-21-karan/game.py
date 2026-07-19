@@ -1,3 +1,6 @@
+import streamlit as st
+import requests
+from datetime import datetime
 import random
 
 # कंप्यूटर एक नंबर चुनता है (1 से 10 के बीच)
